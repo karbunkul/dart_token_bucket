@@ -1,39 +1,48 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Token Bucket
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Token Bucket is a Dart library for implementing rate limiting using the token bucket algorithm. It provides a simple and efficient way to control the rate of actions in your application.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Token Bucket Algorithm:** Implements the token bucket algorithm for rate limiting.
+- **Flexible Configuration:** Customize token bucket capacity, refill frequency, and storage mechanism.
+- **Memory and Custom Storage:** Supports memory-based storage and allows integration with custom storage solutions.
+- **Async Operations:** Asynchronous token consumption for non-blocking rate limiting.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use Token Bucket in your Dart project, add it to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  token_bucket: ^1.0.0
+```
+
+Then, run dart pub get to install the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+import 'package:token_bucket/token_bucket.dart';
+
+void main() async {
+  // Initialize a token bucket with a capacity of 100 tokens and a refill frequency of one minute.
+  final bucket = TokenBucket(
+    capacity: 100,
+    frequency: RefillFrequency.minute,
+    storage: MemoryBucketStorage(),
+  );
+
+  try {
+    // Consume tokens from the bucket identified by 'user123'.
+    final state = await bucket.consume(bucketId: 'user123', coast: 10);
+    if (state.consumed) {
+      print('Tokens consumed successfully!');
+    } else {
+      print('Tokens cannot be consumed. Remaining time to refill: ${state.remainToRefill} milliseconds.');
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.

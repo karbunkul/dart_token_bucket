@@ -1,15 +1,20 @@
+/// An enumeration representing different refill frequencies for a token bucket.
 enum RefillFrequency {
-  // one second in milliseconds
+  /// Refill frequency of one second in milliseconds.
   second(1000),
-  // one minute in milliseconds
+
+  /// Refill frequency of one minute in milliseconds.
   minute(60000),
-  // one hour in milliseconds
+
+  /// Refill frequency of one hour in milliseconds.
   hour(3600000),
-  // one day in milliseconds
+
+  /// Refill frequency of one day in milliseconds.
   day(86400000);
 
-  /// Refill frequency in milliseconds
+  /// Refill frequency in milliseconds.
   final int frequency;
 
+  /// Constructs a refill frequency with the provided [frequency] in milliseconds.
   const RefillFrequency(this.frequency);
 }
