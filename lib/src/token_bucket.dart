@@ -31,11 +31,11 @@ class TokenBucket {
     final state = await storage.fetch(bucketId);
     if (state == null) {
       // Initialize bucket state if it doesn't exist.
-      await storage.save(bucketId, BucketState.initState(count: coast).bytes);
+      await storage.save(bucketId, BucketState.initState(count: coast).state);
       return TokenState(consumed: true, remainToRefill: 0);
     }
 
-    final bucketState = BucketState.fromBytes(state);
+    final bucketState = BucketState.fromState(state);
 
     if (bucketState.count + coast > capacity) {
       // Calculate remaining time to refill if the bucket is full.
@@ -44,7 +44,7 @@ class TokenBucket {
 
       if (remainToRefill < 0) {
         // Refill the bucket if the refill time has passed.
-        await storage.save(bucketId, BucketState.initState(count: coast).bytes);
+        await storage.save(bucketId, BucketState.initState(count: coast).state);
         return TokenState(consumed: true, remainToRefill: 0);
       } else {
         // Tokens cannot be consumed, return the remaining time to refill.
@@ -52,7 +52,7 @@ class TokenBucket {
       }
     }
     // Consume tokens from the bucket and update its state.
-    await storage.save(bucketId, bucketState.consume(coast).bytes);
+    await storage.save(bucketId, bucketState.consume(coast).state);
     return TokenState(consumed: true, remainToRefill: 0);
   }
 }

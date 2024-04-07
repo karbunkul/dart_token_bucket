@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:meta/meta.dart';
 
 /// @internal
@@ -17,8 +14,8 @@ class BucketState {
   const BucketState({required this.count, required this.timestamp});
 
   /// Retrieves the bytes representing the bucket state.
-  Uint8List get bytes {
-    return utf8.encode('$timestamp|$count');
+  String get state {
+    return '$timestamp|$count';
   }
 
   /// Consumes tokens from the bucket and returns the new state.
@@ -35,8 +32,8 @@ class BucketState {
   }
 
   /// Constructs a bucket state from the provided bytes.
-  factory BucketState.fromBytes(Uint8List bytes) {
-    final parts = utf8.decode(bytes).split('|');
+  factory BucketState.fromState(String state) {
+    final parts = state.split('|');
     return BucketState(
       count: int.parse(parts.last),
       timestamp: int.parse(parts.first),

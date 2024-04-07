@@ -15,7 +15,7 @@ To use Token Bucket in your Dart project, add it to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  token_bucket: ^1.0.0
+  token_bucket: ^0.9.7-pre
 ```
 
 Then, run dart pub get to install the package.

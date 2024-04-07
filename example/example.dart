@@ -10,9 +10,7 @@ Future<void> main() async {
   );
 
   await consume(tokenBucket, 10);
-  // await Future.delayed(const Duration(milliseconds: 200));
   await consume(tokenBucket, 10);
-  // await Future.delayed(const Duration(milliseconds: 700));
   await consume(tokenBucket, 3);
 }
 

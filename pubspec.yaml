@@ -1,15 +1,17 @@
 name: token_bucket
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+description: Token Bucket is a Dart library for implementing rate limiting using the token bucket algorithm. It provides a simple and efficient way to control the rate of actions in your application.
+version: 0.9.7-pre
+repository: https://github.com/karbunkul/dart_token_bucket
+
+topics:
+  - rate limit
+  - token bucket
 
 environment:
   sdk: ^3.3.2
 
-# Add regular dependencies here.
 dependencies:
   meta: ^1.12.0
-  # path: ^1.8.0
 
 dev_dependencies:
   lints: ^3.0.0
