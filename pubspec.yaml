@@ -4,8 +4,8 @@ version: 0.9.7-pre
 repository: https://github.com/karbunkul/dart_token_bucket
 
 topics:
-  - rate limit
-  - token bucket
+  - rate-limit
+  - token-bucket
 
 environment:
   sdk: ^3.3.2
